@@ -19,6 +19,7 @@ builder.Logging.SetMinimumLevel(LogLevel.Information);
 
 // Register GigaChatService
 builder.Services.AddSingleton<GigaChatService>();
+builder.Services.AddHttpClient();
 
 var app = builder.Build();
 
