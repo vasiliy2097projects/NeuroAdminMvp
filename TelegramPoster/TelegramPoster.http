@@ -1,0 +1,6 @@
+@TelegramPoster_HostAddress = http://localhost:5167
+
+GET {{TelegramPoster_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
