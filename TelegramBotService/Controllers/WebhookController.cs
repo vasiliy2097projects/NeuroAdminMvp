@@ -32,8 +32,23 @@ namespace TelegramBotService.Controllers
 
 					_logger.LogInformation("Processing message: {Text} from chat {ChatId}", text, chatId);
 
-					// Echo the message back
-					await _telegramService.SendMessageAsync(chatId, $"You said: {text}");
+					if (text.StartsWith("/generate"))
+					{
+						var topic = text.Replace("/generate", "").Trim();
+						if (string.IsNullOrEmpty(topic))
+						{
+							await _telegramService.SendMessageAsync(chatId, "Пожалуйста, укажите тему поста после команды /generate. Например: /generate Искусственный интеллект");
+							return Ok(new { status = "ok" });
+						}
+
+						await _telegramService.SendMessageAsync(chatId, $"Генерирую пост на тему: {topic}...");
+						await _telegramService.SendPostGenerationRequestAsync(topic);
+						await _telegramService.SendMessageAsync(chatId, "Пост успешно сгенерирован и опубликован!");
+					}
+					else
+					{
+						await _telegramService.SendMessageAsync(chatId, "Используйте команду generate для генерации поста");
+					}
 				}
 
 				return Ok(new { status = "ok" });
