@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GigaChatPostGenerator", "Gi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TelegramPoster", "TelegramPoster\TelegramPoster.csproj", "{6454DC78-2FBA-410B-B32F-E8745916DD9F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TelegramBotService", "TelegramBotService\TelegramBotService.csproj", "{CCAC9616-30D6-FFD2-2510-9AECAB790A0F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,18 @@ Global
 		{6454DC78-2FBA-410B-B32F-E8745916DD9F}.Release|x64.Build.0 = Release|Any CPU
 		{6454DC78-2FBA-410B-B32F-E8745916DD9F}.Release|x86.ActiveCfg = Release|Any CPU
 		{6454DC78-2FBA-410B-B32F-E8745916DD9F}.Release|x86.Build.0 = Release|Any CPU
+		{CCAC9616-30D6-FFD2-2510-9AECAB790A0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CCAC9616-30D6-FFD2-2510-9AECAB790A0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CCAC9616-30D6-FFD2-2510-9AECAB790A0F}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{CCAC9616-30D6-FFD2-2510-9AECAB790A0F}.Debug|x64.Build.0 = Debug|Any CPU
+		{CCAC9616-30D6-FFD2-2510-9AECAB790A0F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{CCAC9616-30D6-FFD2-2510-9AECAB790A0F}.Debug|x86.Build.0 = Debug|Any CPU
+		{CCAC9616-30D6-FFD2-2510-9AECAB790A0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CCAC9616-30D6-FFD2-2510-9AECAB790A0F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CCAC9616-30D6-FFD2-2510-9AECAB790A0F}.Release|x64.ActiveCfg = Release|Any CPU
+		{CCAC9616-30D6-FFD2-2510-9AECAB790A0F}.Release|x64.Build.0 = Release|Any CPU
+		{CCAC9616-30D6-FFD2-2510-9AECAB790A0F}.Release|x86.ActiveCfg = Release|Any CPU
+		{CCAC9616-30D6-FFD2-2510-9AECAB790A0F}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
