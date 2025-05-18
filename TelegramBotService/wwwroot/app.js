@@ -24,35 +24,6 @@ if (user) {
     }
 }
 
-// Функция для создания элемента канала
-function createChannelElement(channel) {
-    const channelElement = document.createElement('div');
-    channelElement.className = 'channel-item';
-    
-    const avatar = document.createElement('div');
-    avatar.className = 'channel-avatar';
-    avatar.textContent = channel.title.charAt(0).toUpperCase();
-    
-    const info = document.createElement('div');
-    info.className = 'channel-info';
-    
-    const name = document.createElement('div');
-    name.className = 'channel-name';
-    name.textContent = channel.title;
-    
-    const subscribers = document.createElement('div');
-    subscribers.className = 'channel-subscribers';
-    subscribers.textContent = `${channel.membersCount || 0} подписчиков`;
-    
-    info.appendChild(name);
-    info.appendChild(subscribers);
-    
-    channelElement.appendChild(avatar);
-    channelElement.appendChild(info);
-    
-    return channelElement;
-}
-
 // Функция для создания элемента слота
 function createSlotElement(slot) {
     const slotElement = document.createElement('div');
@@ -80,46 +51,6 @@ function createSlotElement(slot) {
     slotElement.appendChild(channels);
     
     return slotElement;
-}
-
-// Функция для загрузки списка каналов
-async function loadChannels() {
-    try {
-        const response = await fetch('/api/channels');
-        if (!response.ok) {
-            throw new Error('Failed to load channels');
-        }
-        
-        const channels = await response.json();
-        const channelsList = document.getElementById('channelsList');
-        channelsList.innerHTML = ''; // Очищаем список
-        
-        channels.forEach(channel => {
-            channelsList.appendChild(createChannelElement(channel));
-        });
-
-        // Обновляем списки в форме создания слота
-        const sourceChannel = document.getElementById('sourceChannel');
-        const targetChannel = document.getElementById('targetChannel');
-        
-        sourceChannel.innerHTML = '<option value="">Выберите канал-источник</option>';
-        targetChannel.innerHTML = '<option value="">Выберите канал назначения</option>';
-        
-        channels.forEach(channel => {
-            const sourceOption = document.createElement('option');
-            sourceOption.value = channel.id;
-            sourceOption.textContent = channel.title;
-            sourceChannel.appendChild(sourceOption);
-
-            const targetOption = document.createElement('option');
-            targetOption.value = channel.id;
-            targetOption.textContent = channel.title;
-            targetChannel.appendChild(targetOption);
-        });
-    } catch (error) {
-        console.error('Error loading channels:', error);
-        tg.showAlert('Ошибка при загрузке списка каналов');
-    }
 }
 
 // Функция для загрузки списка слотов
@@ -219,8 +150,7 @@ document.getElementById('saveSlotButton').addEventListener('click', async () => 
     }
 });
 
-// Загружаем списки при загрузке страницы
-loadChannels();
+// Загружаем список слотов при загрузке страницы
 loadSlots();
 
 // Обработчик события готовности приложения
