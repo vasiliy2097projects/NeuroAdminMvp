@@ -17,7 +17,7 @@
       .container {
         max-width: 600px;
         margin: 0 auto;
-        text-align: center;
+        padding-top: 80px;
       }
       .user-profile {
         position: fixed;
@@ -48,8 +48,147 @@
         margin: 0;
         font-size: 12px;
       }
-      h1 {
+      .channels-list {
+        margin-top: 20px;
+      }
+      .channel-item {
+        display: flex;
+        align-items: center;
+        padding: 15px;
+        margin-bottom: 10px;
+        background-color: var(--tg-theme-secondary-bg-color, #f0f0f0);
+        border-radius: 10px;
+        cursor: pointer;
+        transition: background-color 0.2s;
+      }
+      .channel-item:hover {
+        background-color: var(--tg-theme-hint-color, #e0e0e0);
+      }
+      .channel-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        margin-right: 15px;
+        background-color: var(--tg-theme-button-color, #2481cc);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: bold;
+      }
+      .channel-info {
+        flex: 1;
+      }
+      .channel-name {
+        font-weight: bold;
+        margin-bottom: 3px;
         color: var(--tg-theme-text-color, #000000);
+      }
+      .channel-subscribers {
+        font-size: 12px;
+        color: var(--tg-theme-hint-color, #999999);
+      }
+      .section-title {
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 15px;
+        color: var(--tg-theme-text-color, #000000);
+      }
+      .add-slot-button {
+        background-color: var(--tg-theme-button-color, #2481cc);
+        color: var(--tg-theme-button-text-color, #ffffff);
+        border: none;
+        padding: 10px 20px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: bold;
+        margin-bottom: 20px;
+      }
+      .slot-form {
+        background-color: var(--tg-theme-secondary-bg-color, #f0f0f0);
+        padding: 20px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        display: none;
+      }
+      .slot-form.active {
+        display: block;
+      }
+      .form-group {
+        margin-bottom: 15px;
+      }
+      .form-group label {
+        display: block;
+        margin-bottom: 5px;
+        color: var(--tg-theme-text-color, #000000);
+        font-weight: bold;
+      }
+      .form-group input {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid var(--tg-theme-hint-color, #999999);
+        border-radius: 5px;
+        background-color: var(--tg-theme-bg-color, #ffffff);
+        color: var(--tg-theme-text-color, #000000);
+      }
+      .form-group .hint {
+        font-size: 12px;
+        color: var(--tg-theme-hint-color, #999999);
+        margin-top: 5px;
+      }
+      .form-actions {
+        display: flex;
+        gap: 10px;
+        justify-content: flex-end;
+      }
+      .form-actions button {
+        padding: 8px 16px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+      }
+      .save-button {
+        background-color: var(--tg-theme-button-color, #2481cc);
+        color: var(--tg-theme-button-text-color, #ffffff);
+        border: none;
+      }
+      .cancel-button {
+        background-color: var(--tg-theme-secondary-bg-color, #f0f0f0);
+        color: var(--tg-theme-text-color, #000000);
+        border: 1px solid var(--tg-theme-hint-color, #999999);
+      }
+      .slots-list {
+        margin-top: 20px;
+      }
+      .slot-item {
+        background-color: var(--tg-theme-secondary-bg-color, #f0f0f0);
+        padding: 15px;
+        margin-bottom: 10px;
+        border-radius: 10px;
+      }
+      .slot-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+      .slot-name {
+        font-weight: bold;
+        color: var(--tg-theme-text-color, #000000);
+      }
+      .slot-status {
+        font-size: 12px;
+        padding: 4px 8px;
+        border-radius: 4px;
+        background-color: var(--tg-theme-button-color, #2481cc);
+        color: var(--tg-theme-button-text-color, #ffffff);
+      }
+      .slot-status.inactive {
+        background-color: var(--tg-theme-hint-color, #999999);
+      }
+      .slot-channels {
+        font-size: 14px;
+        color: var(--tg-theme-hint-color, #999999);
       }
     </style>
   </head>
@@ -62,7 +201,50 @@
       </div>
     </div>
     <div class="container">
-      <h1>Hello World!</h1>
+      <div class="section-title">Мои каналы</div>
+      <div class="channels-list" id="channelsList">
+        <!-- Channels will be added here dynamically -->
+      </div>
+
+      <button class="add-slot-button" id="addSlotButton">Добавить слот</button>
+
+      <div class="slot-form" id="slotForm">
+        <div class="form-group">
+          <label for="slotName">Название слота</label>
+          <input
+            type="text"
+            id="slotName"
+            placeholder="Введите название слота"
+          />
+        </div>
+        <div class="form-group">
+          <label for="sourceChannel">Канал-источник</label>
+          <input
+            type="text"
+            id="sourceChannel"
+            placeholder="Введите ID канала-источника"
+          />
+          <div class="hint">Формат: -100xxxxxxxxxx или @username</div>
+        </div>
+        <div class="form-group">
+          <label for="targetChannel">Канал назначения</label>
+          <input
+            type="text"
+            id="targetChannel"
+            placeholder="Введите ID канала назначения"
+          />
+          <div class="hint">Формат: -100xxxxxxxxxx или @username</div>
+        </div>
+        <div class="form-actions">
+          <button class="cancel-button" id="cancelSlotButton">Отмена</button>
+          <button class="save-button" id="saveSlotButton">Сохранить</button>
+        </div>
+      </div>
+
+      <div class="section-title">Мои слоты</div>
+      <div class="slots-list" id="slotsList">
+        <!-- Slots will be added here dynamically -->
+      </div>
     </div>
     <script src="app.js"></script>
   </body>
