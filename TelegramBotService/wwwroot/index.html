@@ -19,12 +19,48 @@
         margin: 0 auto;
         text-align: center;
       }
+      .user-profile {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        z-index: 1000;
+      }
+      .user-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+      .user-info {
+        text-align: left;
+      }
+      .user-name {
+        font-weight: bold;
+        color: var(--tg-theme-text-color, #000000);
+        margin: 0;
+        font-size: 14px;
+      }
+      .user-username {
+        color: var(--tg-theme-hint-color, #999999);
+        margin: 0;
+        font-size: 12px;
+      }
       h1 {
         color: var(--tg-theme-text-color, #000000);
       }
     </style>
   </head>
   <body>
+    <div class="user-profile">
+      <img id="userAvatar" class="user-avatar" src="" alt="User Avatar" />
+      <div class="user-info">
+        <div id="userName" class="user-name">Loading...</div>
+        <div id="userUsername" class="user-username">@username</div>
+      </div>
+    </div>
     <div class="container">
       <h1>Hello World!</h1>
     </div>
