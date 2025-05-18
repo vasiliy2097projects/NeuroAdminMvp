@@ -42,8 +42,16 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseStaticFiles();
 app.UseAuthorization();
 app.MapControllers();
+
+// Добавляем обработку корневого маршрута
+app.MapGet("/", async context =>
+{
+	context.Response.ContentType = "text/html";
+	await context.Response.SendFileAsync("wwwroot/index.html");
+});
 
 // Set up webhook
 var webhookUrl = builder.Configuration["WebhookUrl"];

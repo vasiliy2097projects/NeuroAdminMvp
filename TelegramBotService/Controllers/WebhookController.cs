@@ -45,9 +45,15 @@ namespace TelegramBotService.Controllers
 						await _telegramService.SendPostGenerationRequestAsync(topic);
 						await _telegramService.SendMessageAsync(chatId, "Пост успешно сгенерирован и опубликован!");
 					}
+					else if (text == "/app")
+					{
+						var webAppUrl = $"{Request.Scheme}://{Request.Host}";
+						var message = $"Откройте мини-приложение: {webAppUrl}";
+						await _telegramService.SendMessageAsync(chatId, message);
+					}
 					else
 					{
-						await _telegramService.SendMessageAsync(chatId, "Используйте команду generate для генерации поста");
+						await _telegramService.SendMessageAsync(chatId, "Используйте команды:\n/generate <тема> - для генерации поста\n/app - для открытия мини-приложения");
 					}
 				}
 
